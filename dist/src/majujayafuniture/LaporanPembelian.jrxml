@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="50d86d29-932b-4617-819d-c6a7c2fc6098">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Pembelian" uuid="8e8ff2ec-8ad2-4624-a9ff-d5e8f885b115">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     beli.`NoNota` AS beli_NoNota,
+     beli.`KodePemasok` AS beli_KodePemasok,
+     beli.`TglBeli` AS beli_TglBeli,
+     beli.`TglTempo` AS beli_TglTempo,
+     beli.`TglPelunasan` AS beli_TglPelunasan,
+     beli.`TotalHarga` AS beli_TotalHarga,
+     beli.`status` AS beli_status,
+     beli_detail.`NoNota` AS beli_detail_NoNota,
+     beli_detail.`KodeBrg` AS beli_detail_KodeBrg,
+     beli_detail.`Qty` AS beli_detail_Qty,
+     beli_detail.`HargaBeli` AS beli_detail_HargaBeli,
+     beli_detail.`Subtotal` AS beli_detail_Subtotal,
+     pemasok.`KodePemasok` AS pemasok_KodePemasok,
+     pemasok.`NamaPemasok` AS pemasok_NamaPemasok,
+     pemasok.`alamat` AS pemasok_alamat,
+     pemasok.`Telp` AS pemasok_Telp,
+     produk.`Kodebrg` AS produk_Kodebrg,
+     produk.`NamaBrg` AS produk_NamaBrg,
+     produk.`HargaBeli` AS produk_HargaBeli,
+     produk.`Stok` AS produk_Stok
+FROM
+     `beli` beli INNER JOIN `beli_detail` beli_detail ON beli.`NoNota` = beli_detail.`NoNota`
+     INNER JOIN `pemasok` pemasok ON beli.`KodePemasok` = pemasok.`KodePemasok`
+     INNER JOIN `produk` produk ON beli_detail.`KodeBrg` = produk.`Kodebrg`]]>
+		</queryString>
+		<field name="beli_NoNota" class="java.lang.String"/>
+		<field name="beli_KodePemasok" class="java.lang.String"/>
+		<field name="beli_TglBeli" class="java.sql.Date"/>
+		<field name="beli_TglTempo" class="java.sql.Date"/>
+		<field name="beli_TglPelunasan" class="java.sql.Date"/>
+		<field name="beli_TotalHarga" class="java.lang.Integer"/>
+		<field name="beli_status" class="java.lang.String"/>
+		<field name="beli_detail_NoNota" class="java.lang.String"/>
+		<field name="beli_detail_KodeBrg" class="java.lang.String"/>
+		<field name="beli_detail_Qty" class="java.lang.Integer"/>
+		<field name="beli_detail_HargaBeli" class="java.lang.Integer"/>
+		<field name="beli_detail_Subtotal" class="java.lang.Integer"/>
+		<field name="pemasok_KodePemasok" class="java.lang.String"/>
+		<field name="pemasok_NamaPemasok" class="java.lang.String"/>
+		<field name="pemasok_alamat" class="java.lang.String"/>
+		<field name="pemasok_Telp" class="java.lang.String"/>
+		<field name="produk_Kodebrg" class="java.lang.String"/>
+		<field name="produk_NamaBrg" class="java.lang.String"/>
+		<field name="produk_HargaBeli" class="java.lang.Integer"/>
+		<field name="produk_Stok" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="pPeriode" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     date_format(beli.`TglBeli`,'%M') AS Bulan,
+     beli.`NoNota` AS beli_NoNota,
+     beli.`KodePemasok` AS beli_KodePemasok,
+     beli.`TglBeli` AS beli_TglBeli,
+     beli.`TglTempo` AS beli_TglTempo,
+     beli.`TglPelunasan` AS beli_TglPelunasan,
+     beli.`TotalHarga` AS beli_TotalHarga,
+     beli.`status` AS beli_status,
+     beli_detail.`NoNota` AS beli_detail_NoNota,
+     beli_detail.`KodeBrg` AS beli_detail_KodeBrg,
+     beli_detail.`Qty` AS beli_detail_Qty,
+     beli_detail.`HargaBeli` AS beli_detail_HargaBeli,
+     beli_detail.`Subtotal` AS beli_detail_Subtotal,
+     pemasok.`KodePemasok` AS pemasok_KodePemasok,
+     pemasok.`NamaPemasok` AS pemasok_NamaPemasok,
+     pemasok.`alamat` AS pemasok_alamat,
+     pemasok.`Telp` AS pemasok_Telp,
+     produk.`Kodebrg` AS produk_Kodebrg,
+     produk.`NamaBrg` AS produk_NamaBrg,
+     produk.`HargaBeli` AS produk_HargaBeli,
+     produk.`Stok` AS produk_Stok
+FROM
+     `beli` beli INNER JOIN `beli_detail` beli_detail ON beli.`NoNota` = beli_detail.`NoNota`
+     INNER JOIN `pemasok` pemasok ON beli.`KodePemasok` = pemasok.`KodePemasok`
+     INNER JOIN `produk` produk ON beli_detail.`KodeBrg` = produk.`Kodebrg`
+WHERE
+     month(TglBeli) = LEFT($P{pPeriode},2)
+     and year(TglBeli) = RIGHT($P{pPeriode},4)]]>
+	</queryString>
+	<field name="Bulan" class="java.lang.String"/>
+	<field name="beli_NoNota" class="java.lang.String"/>
+	<field name="beli_KodePemasok" class="java.lang.String"/>
+	<field name="beli_TglBeli" class="java.sql.Date"/>
+	<field name="beli_TglTempo" class="java.sql.Date"/>
+	<field name="beli_TglPelunasan" class="java.sql.Date"/>
+	<field name="beli_TotalHarga" class="java.lang.Integer"/>
+	<field name="beli_status" class="java.lang.String"/>
+	<field name="beli_detail_NoNota" class="java.lang.String"/>
+	<field name="beli_detail_KodeBrg" class="java.lang.String"/>
+	<field name="beli_detail_Qty" class="java.lang.Integer"/>
+	<field name="beli_detail_HargaBeli" class="java.lang.Integer"/>
+	<field name="beli_detail_Subtotal" class="java.lang.Integer"/>
+	<field name="pemasok_KodePemasok" class="java.lang.String"/>
+	<field name="pemasok_NamaPemasok" class="java.lang.String"/>
+	<field name="pemasok_alamat" class="java.lang.String"/>
+	<field name="pemasok_Telp" class="java.lang.String"/>
+	<field name="produk_Kodebrg" class="java.lang.String"/>
+	<field name="produk_NamaBrg" class="java.lang.String"/>
+	<field name="produk_HargaBeli" class="java.lang.Integer"/>
+	<field name="produk_Stok" class="java.lang.Integer"/>
+	<sortField name="beli_TglBeli"/>
+	<sortField name="beli_NoNota"/>
+	<variable name="Total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{beli_detail_Subtotal}]]></variableExpression>
+	</variable>
+	<group name="beli_NoNota">
+		<groupExpression><![CDATA[$F{beli_NoNota}]]></groupExpression>
+	</group>
+	<group name="beli_detail_KodeBrg">
+		<groupExpression><![CDATA[$F{beli_detail_KodeBrg}]]></groupExpression>
+	</group>
+	<group name="TglBeli">
+		<groupExpression><![CDATA[$F{beli_TglBeli}]]></groupExpression>
+	</group>
+	<group name="GroupTglBeli">
+		<groupExpression><![CDATA[$F{beli_TglBeli}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="258" y="22" width="286" height="16" uuid="6080e130-9f4e-4b04-8296-9a6fc3be2309"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century" size="12"/>
+				</textElement>
+				<text><![CDATA[Jl. Adisucipto Km. 8,2 Sungai Raya, Kubu Raya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="5" width="307" height="22" uuid="f4a1458d-5531-4a85-ba42-a2cc4bf992c4"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Century" size="12"/>
+				</textElement>
+				<text><![CDATA[TOKO MAJU JAYA FUNITURE & ELEKTRONIK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="36" width="286" height="16" uuid="c62cc4cb-ee22-4b19-ad45-df21335be2e2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century" size="12"/>
+				</textElement>
+				<text><![CDATA[Telp. (0561) 721835 / 0812 5427 4998]]></text>
+			</staticText>
+			<line>
+				<reportElement x="248" y="21" width="307" height="1" uuid="61a5aa0d-f89e-4998-b70f-d319a99d5064"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="51" width="802" height="1" uuid="7221660f-1f6f-458a-8d44-29fa946f1fb0"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="35" uuid="fe7d722a-75db-42c2-bfbf-22aa594dec14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN PEMBELIAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="53" width="100" height="20" uuid="6430b1d0-ee5d-4ee2-bc07-071755e21dd9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Periode :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="33" width="100" height="20" uuid="00e3d325-d146-4196-a0d8-dde382df0855"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tanggal Cetak :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="87" y="33" width="100" height="20" uuid="eca60763-7212-406a-b76a-c213c70dacb8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="53" width="90" height="20" uuid="567311d5-4e53-4eff-ad2c-9a157f5e72ed"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pPeriode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="table" mode="Opaque" x="0" y="0" width="133" height="20" backcolor="#DCDBE2" uuid="711b0a57-6a46-4558-9622-e440939eec88"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[No Nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" mode="Opaque" x="133" y="0" width="133" height="20" backcolor="#DCDBE2" uuid="a49a62c4-f988-4023-af5d-0e93cadd6eca"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" mode="Opaque" x="266" y="0" width="133" height="20" backcolor="#DCDBE2" uuid="882c43f1-b9d4-4204-9dc9-5f1ae83afe84"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Nama Pemasok]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" mode="Opaque" x="399" y="0" width="194" height="20" backcolor="#DCDBE2" uuid="f7fe37ed-94a7-4e09-b66f-3049c777b1e5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" mode="Opaque" x="593" y="0" width="72" height="20" backcolor="#DCDBE2" uuid="325628f2-063d-4cc0-8b3b-667463eba1f7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" mode="Opaque" x="665" y="0" width="133" height="20" backcolor="#DCDBE2" uuid="7d563232-3288-4902-a972-ad278426c605"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<elementGroup/>
+			<textField>
+				<reportElement style="table" x="0" y="0" width="133" height="20" uuid="26ca8069-303f-41b4-ab1a-113d7e9759a8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{beli_NoNota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table" x="133" y="0" width="133" height="20" uuid="3e90308d-0f51-43be-8830-eb88f7ec65ce"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{beli_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table" x="266" y="0" width="133" height="20" uuid="e0368867-45d5-4360-b197-83b37fd23465"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pemasok_NamaPemasok}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table" x="399" y="0" width="194" height="20" uuid="2a9b26f5-de11-46a2-a01a-303972fea122"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produk_NamaBrg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table" x="593" y="0" width="72" height="20" uuid="60853c93-07d5-4019-9886-796045701a61"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{beli_detail_Qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="table" x="665" y="0" width="133" height="20" uuid="da623b87-3d76-469a-bd6a-933990abf197"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="14"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{beli_detail_Subtotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement x="319" y="18" width="100" height="20" uuid="5e34c4a2-b781-4175-b256-f70ba8559198"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="419" y="18" width="40" height="20" uuid="798659b0-082b-4e8a-b528-9585c27229a0"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement style="table" mode="Opaque" x="665" y="0" width="133" height="20" backcolor="#DCDBE2" uuid="78906af3-46c9-4932-b353-13059277abf8"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table" mode="Opaque" x="593" y="0" width="72" height="20" backcolor="#DCDBE2" uuid="0c68bd18-fb33-4728-b60e-bf663150bede"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
